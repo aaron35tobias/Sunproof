@@ -20,7 +20,7 @@ Open it in Chrome on a laptop or a phone. The browser will ask to use your **loc
 
 ---
 
-## 🧭 5-minute walkthrough for judges
+## 🧭 5-minute walkthrough 
 
 | # | Try this | What to look for |
 |---|----------|------------------|
@@ -73,7 +73,7 @@ cd <repo-folder>
 npm install
 ```
 
-Set up the supervisor login. It is kept in a private `.env` file that is never uploaded:
+Set up the supervisor login:
 
 ```bash
 cp .env.example .env                          # on Windows: copy .env.example .env
