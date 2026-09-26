@@ -1,0 +1,13 @@
+import { useState, type FormEvent } from 'react';
+import { ClipboardCheck } from 'lucide-react';
+interface Props { onSave: (checks: Record<string, boolean>) => Promise<void>; online: boolean; siteName: string; }
+const checks = [['ppe', 'PPE available and correctly worn'], ['equipment', 'Tools and equipment inspected'], ['access', 'Access routes and exits clear'], ['heat_plan', 'Heat controls and water available']] as const;
+export default function InspectionFlow({ onSave, online, siteName }: Props) {
+  const [values, setValues] = useState<Record<string, boolean>>({});
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+  const [done, setDone] = useState(false);
+  async function submit(e: FormEvent) { e.preventDefault(); setSaving(true); setError(''); try { await onSave(values); setDone(true); } catch (err) { setError(err instanceof Error ? err.message : 'Could not save inspection.'); } finally { setSaving(false); } }
+  const complete = checks.every(([key]) => values[key]);
+  return <div className="max-w-2xl mx-auto space-y-6"><div><p className="eyebrow">FIELD PROTOCOL / PRE-SHIFT</p><h1 className="page-title">Pre-shift inspection</h1><p className="text-zinc-400 sun:text-yellow-400 mt-2">{siteName}</p></div>{done ? <div className="panel p-8 text-center"><ClipboardCheck className="mx-auto text-emerald-400 sun:text-yellow-400 mb-4" size={44}/><h2 className="text-2xl font-bold">Inspection recorded</h2><p className="text-zinc-400 sun:text-yellow-400 mt-2">Your site readiness check is saved.</p><button type="button" className="secondary-button mt-6" onClick={() => { setValues({}); setDone(false); }}>START NEW INSPECTION</button></div> : <form onSubmit={submit} className="panel p-6 space-y-5"><p className="eyebrow">VERIFY ALL CHECKPOINTS</p>{checks.map(([key, text], i) => <label key={key} className="flex items-center gap-4 border border-zinc-700 p-4 cursor-pointer hover:border-amber-400 sun:border-yellow-400"><input type="checkbox" className="w-6 h-6 accent-amber-400" checked={!!values[key]} onChange={e => setValues(v => ({ ...v, [key]: e.target.checked }))}/><span className="font-medium"><span className="text-amber-400 font-mono mr-3">0{i + 1}</span>{text}</span></label>)}{!online && <p className="text-amber-400 text-sm">Connect to a network to submit an inspection. Hazard reports and SOS still save offline.</p>}{error && <p role="alert" className="text-red-400">{error}</p>}<button className="action-button w-full" disabled={saving || !online || !complete}>{saving ? 'RECORDING INSPECTION…' : complete ? 'SUBMIT INSPECTION' : `VERIFY ALL CHECKPOINTS (${checks.filter(([key]) => values[key]).length}/${checks.length})`}</button></form>}</div>;
+}

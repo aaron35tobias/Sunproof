@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+/* SUN MODE: high-contrast black/yellow theme toggled by the .sun class on <html>. */
+@custom-variant sun (&:where(.sun, .sun *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html { color-scheme: dark; background: #0c1117; }
+  html.sun { background: #000; }
+  body { margin: 0; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+  button:not(:disabled), label { cursor: pointer; }
+  button:disabled { cursor: not-allowed; opacity: .45; }
+  :focus-visible { outline: 3px solid #fbbf24; outline-offset: 2px; }
+}
+
+@layer components {
+  .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #fbbf24; }
+  .panel { background: #121a23; border: 1px solid #27303b; }
+  .page-title { margin-top: .5rem; font-size: 2rem; line-height: 1.1; font-weight: 900; letter-spacing: -.025em; color: #fff; }
+  @media (min-width: 48rem) { .page-title { font-size: 3rem; } }
+
+  .field-input { background: #0c1117; border: 1px solid #3f3f46; color: inherit; padding: .75rem 1rem; font-size: 1rem; border-radius: 0; }
+  .field-input:focus { border-color: #fbbf24; outline: none; }
+  .field-input::placeholder { color: #71717a; }
+
+  .action-button { min-height: 3rem; padding: .875rem 1.25rem; background: #fbbf24; color: #0f172a; border: 2px solid #fbbf24; font-size: .875rem; font-weight: 900; letter-spacing: .08em; transition: background-color .15s; }
+  .action-button:hover:not(:disabled) { background: #fde047; border-color: #fde047; }
+  .secondary-button { min-height: 3rem; padding: .75rem 1.25rem; background: transparent; color: #e4e4e7; border: 1px solid #52525b; font-size: .8125rem; font-weight: 800; letter-spacing: .08em; transition: border-color .15s, color .15s; }
+  .secondary-button:hover:not(:disabled) { border-color: #fbbf24; color: #fbbf24; }
+
+  .clip-corner { clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%); }
+  .solar-grid {
+    background-image:
+      linear-gradient(#fbbf24 1px, transparent 1px),
+      linear-gradient(90deg, #fbbf24 1px, transparent 1px);
+    background-size: 36px 22px;
+    transform: perspective(400px) rotateX(35deg) scale(1.4);
+    transform-origin: bottom right;
+  }
+  .hazard-pulse { animation: hazard-pulse 2.4s ease-in-out infinite; }
+
+  .sun .panel { background: #000; border-color: #facc15; color: #facc15; }
+  .sun .eyebrow, .sun .page-title { color: #facc15; }
+  .sun .field-input { background: #000; border-color: #facc15; color: #facc15; }
+  .sun .action-button { background: #facc15; border-color: #facc15; color: #000; }
+  .sun .secondary-button { border-color: #facc15; color: #facc15; }
+}
+
+@keyframes hazard-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, .45); }
+  50% { box-shadow: 0 0 0 14px rgba(251, 191, 36, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hazard-pulse { animation: none; }
+}
