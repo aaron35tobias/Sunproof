@@ -1,4 +1,4 @@
-# FIELDGUARD // Industrial Safety OS
+# FIELDGUARD // Industrial Safety OS // Team Vaporcode
 
 **An offline-first safety app for field workers.** Workers can report hazards with a photo and
 GPS, log how they are coping with the heat, and send an SOS, even with no signal. Supervisors
