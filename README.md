@@ -10,7 +10,6 @@ Built for the **Google Developer BIT N BUILD Hackathon**.
 
 ## 🔗 View the app
 
-**Live demo:** https://YOUR-PROJECT.web.app
 
 Open it in Chrome on a laptop or a phone. The browser will ask to use your **location** and
 **camera**. Please allow both so you can try all the features.
