@@ -75,6 +75,7 @@ export const base44 = {
   entities: {
     SafetyReport: entity('SafetyReport'),
     SafetyInspection: entity('SafetyInspection'),
+    InspectionTemplate: entity('InspectionTemplate'),
   },
   integrations: {
     Core: {

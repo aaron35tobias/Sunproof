@@ -24,4 +24,11 @@ export interface SupervisorIncident extends HazardReport {
   resolved: boolean;
   remoteId?: string;
 }
+export interface Checkpoint {
+  id: string;
+  label: string;
+}
+export interface InspectionResult extends Checkpoint {
+  passed: boolean;
+}
 export type View = 'home' | 'hazard' | 'inspection' | 'location' | 'queue' | 'heat' | 'supervisor';
