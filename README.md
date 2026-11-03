@@ -4,7 +4,7 @@
 GPS, log how they are coping with the heat, and send an SOS, even with no signal. Supervisors
 see every incident in one dashboard and dispatch a response crew.
 
-Built for the **Google Developer BIT N BUILD Hackathon**.
+Built for the **Google Developer BIT N BUILD Hackathon**. 🏆 **Top 12 of 50+ teams** at the Google Developer BIT N BUILD Hackathon.
 
 ---
 
